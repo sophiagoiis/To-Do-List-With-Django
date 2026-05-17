@@ -1,29 +1,33 @@
+<!-- Carrega o sistema de arquivos estáticos do Django -->
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDoList</title>
+    <link rel="stylesheet" href="{% static 'tasks/style.css' %}">
 </head>
 <body>
-    <h1>Minhas Tarefas</h1>
+    <div class="container">
+        <h1>Minhas Tarefas</h1>
 
-    <form action="{% url 'create_task' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="Nova Tarefa">
-        <button type="submit">Adicionar</button>
-    </form>
+        <ul>
+            {% for task in tasks %} <!-- Loop que percorre todas as tarefas que vieram do views.py. Tudo que estiver entre {% for %} e {% endfor %} repete pra cada tarefa. -->
+            <li>
+                <a class="btn-toggle" href="{% url 'toggle_task' task.id %}">
+                    {% if task.completed %} ✅ {% else %} ⬜ {% endif %}
+                </a>
+                <span class="task-title {% if task.completed %}concluida{% endif %}">
+                    {{ task.title }}
+                </span>
+                <a class="btn-delete" href="{% url 'delete_task' task.id %}">✕</a>
+            </li>
+            {% endfor %}
+        </ul>
 
-    <ul>
-        {% for task in tasks %}
-        <li>
-            <a href="{% url 'toggle_task' task.id %}">
-                {% if task.completed %} ✅ {% else %} ⬜ {% endif %}
-            </a>
-            {{ task.title }}
-            <a href="{% url 'delete_task' task.id  %}">🗑️</a>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+        <form action="{% url 'create_task' %}" method="post"> <!-- para ond eo django envia os dados e o metodo -->
+            {% csrf_token %}         <!--  Proteção de segurança do Django. Gera um código secreto invisível no form -->
+            <input type="text" name="title" placeholder="Nova Tarefa...">
+            <button type="submit">Adicion
