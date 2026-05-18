@@ -26,7 +26,7 @@
         ativo ta dentro da tag e nao entre elas, ativo é o nome da class no css que eu criei. deixa o btn verde 
         -->
         <ul>
-            {% for task in tasks %} <!-- Loop que percorre todas as tarefas que vieram do views.py. Tudo que estiver entre {% for %} e {% endfor %} repete pra cada tarefa. -->
+            {% for task in tasks %} {# Loop que percorre todas as tarefas que vieram do views.py. Tudo que estiver entre for e endfor repete pra cada tarefa. #}
             <li>
                 <a class="btn-toggle" href="{% url 'toggle_task' task.id %}">
                     {% if task.completed %} ✅ {% else %} ⬜ {% endif %}
