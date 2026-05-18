@@ -13,6 +13,18 @@
     <div class="container">
         <h1>Minhas Tarefas</h1>
 
+        <h1>Minhas Tarefas</h1>
+
+        <div class="filtros"> <!--container p agrupar os 3 botoes de filtro -->
+            <a href="?filtro=todas" class="btn-filtro {% if filtro == 'todas' %} ativo {% endif %}">Todas</a>
+            <a href="?filtro=pendentes" class="btn-filtro {% if filtro == 'pendentes' %} ativo {% endif %}">Pendentes</a>
+            <a href="?filtro=concluidas" class="btn-filtro {% if filtro == 'concluidas' %} ativo {% endif %}">Concluídas</a>
+        </div>
+
+        <!-- 
+        ai tem ? pq é um padrão web que enviai infos pela url
+        ativo ta dentro da tag e nao entre elas, ativo é o nome da class no css que eu criei. deixa o btn verde 
+        -->
         <ul>
             {% for task in tasks %} <!-- Loop que percorre todas as tarefas que vieram do views.py. Tudo que estiver entre {% for %} e {% endfor %} repete pra cada tarefa. -->
             <li>

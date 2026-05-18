@@ -8,9 +8,21 @@ from django.shortcuts import render, redirect
 from .models import Task
 
 def index(request): #index pq é convenccional chamar assi a pág principal
-    tasks = Task.objects.all() #vai na classe Task do banco e busca todas as tarefas
-    return render(request, 'tasks/index.html', {'tasks': tasks}) 
+    filtro = request.GET.get('filtro', 'todas')
 
+    if filtro == 'concluidas':
+        tasks = Task.objects.filter(completed = True) 
+    elif filtro == 'pendentes':
+        tasks = Task.objects.filter(completed = False)
+    else:
+        tasks = Task.objects.all() #Esse all() busca todas as tarefas do banco sem nenhuma condição e guarda na variável tasks.
+
+    return render (request, 'tasks/index.html', {
+        'tasks': tasks,
+        'filtro': filtro
+    }) #isso q ta em {} é o contexto
+
+#filter ja vem no django
 # render(request, 'nome_do_template', contexto)
 #request -> requisição em si
 #'tasks/index.html' → qual template usar

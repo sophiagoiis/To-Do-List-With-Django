@@ -103,3 +103,28 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.filtros {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.btn-filtro {
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    background-color: #f0f2f5;
+    color: #555;
+    transition: background 0.2s;
+}
+
+.btn-filtro:hover {
+    background-color: #ddd;
+}
+
+.btn-filtro.ativo {
+    background-color: #4CAF50;
+    color: white;
+}
